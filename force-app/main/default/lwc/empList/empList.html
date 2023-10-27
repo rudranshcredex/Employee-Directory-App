@@ -1,0 +1,19 @@
+<template>
+
+    <div class="main">
+      <div class="search">
+        <lightning-input 
+          type="search"
+          placeholder="Search by name..."
+          onchange={handleSearch}
+        ></lightning-input>
+    </div>
+    <div>
+        <lightning-datatable
+      key-field="id"
+      data={employeeList}
+      columns={columns}
+    ></lightning-datatable>
+    </div>
+    </div>
+</template>
