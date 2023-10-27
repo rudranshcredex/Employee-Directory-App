@@ -1,0 +1,29 @@
+<template>
+    <div class="main">
+        <h1 class="filter-header">Add Filters</h1>
+
+        <div class="filter-section">
+            <h1>By Location</h1>
+            <div class="filter-select">
+                <select name="Location Filter">
+                    <option value="">Select</option>
+                    <template for:each={location} for:item="loc">
+                        <option key={loc} value={loc}>{loc}</option>
+                    </template>
+                </select>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <h1>By Department</h1>
+            <div class="filter-select">
+                <select name="Department Filter">
+                    <option value="">Select</option>
+                    <template for:each={department} for:item="dept">
+                        <option key={dept} value={dept}>{dept}</option>
+                    </template>
+                </select>
+            </div>
+        </div>
+    </div>
+</template>

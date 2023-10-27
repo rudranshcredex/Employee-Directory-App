@@ -8,4 +8,11 @@ public with sharing class GetEmployeeRecords {
         system.debug('listOfRecords--->'+ listOfRecords);
         return listOfRecords;
     }
+    @AuraEnabled(cacheable = true)
+    public static list<Employee_Directory__c> GetDepartmentAndLocation(){
+        list<Employee_Directory__c> listOfRecords = new list<Employee_Directory__c>();
+        listOfRecords = [select Department__c, Location__c from Employee_Directory__c limit 100];
+        return listOfRecords;
+    }
+
 }
