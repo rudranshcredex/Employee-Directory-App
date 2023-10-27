@@ -8,20 +8,20 @@ export default class EmpList extends LightningElement {
     @track employeeList;
     @track department;
     @track location;
+  
     originalEmployeeList;
     subscription;
-   
-    
+    recordData;
+    name;
+    title;
+    phone;
+    email;
+    id;
+    showModal=false;
 
 
     columns = [{
         label: 'Name', fieldName: 'Name'
-    },
-    {
-        label: 'Title', fieldName: 'Title__c'
-    },
-    {
-        label: 'Contact Number', fieldName: 'Contact_Number__c'
     },
     {
         label: 'Email ID', fieldName: 'Email__c'
@@ -51,44 +51,57 @@ export default class EmpList extends LightningElement {
     handleSearch(event) {
         const key = event.target.value.toLowerCase();
         if (key) {
-           
+
             this.employeeList = this.originalEmployeeList.filter(item => item.Name.toLowerCase().includes(key));
         } else {
-            
+
             this.employeeList = this.originalEmployeeList;
         }
     }
 
-    handleSubscribe(){
-        if(this.subscription){
+    handleSubscribe() {
+        if (this.subscription) {
             return;
         }
         this.subscription = subscribe(this.messageContext, FilterData, (message) => {
             let data = message;
             this.department = data.department;
             this.location = data.location;
-    
+
             console.log('this.department subcribe-------->', JSON.stringify(this.department));
             console.log('this.department--->', this.department);
             console.log('this.location------->', this.location);
-    
-            // Call filterRecords here to apply filtering after receiving the message
             this.filterRecords();
         });
     }
-    
-    filterRecords(){
 
-        if(this.department && this.location){
+    filterRecords() {
+
+        if (this.department && this.location) {
             this.employeeList = this.originalEmployeeList.filter(item => item.Department__c === this.department && item.Location__c === this.location);
 
         }
-        else if(this.department){
-            this.employeeList = this.originalEmployeeList.filter(item=>item.Department__c === this.department);
+        else if (this.department) {
+            this.employeeList = this.originalEmployeeList.filter(item => item.Department__c === this.department);
         }
-        else if(this.location){
+        else if (this.location) {
             this.employeeList = this.originalEmployeeList.filter(item => item.Location__c === this.location);
         }
     }
 
+    handleRecordDetails(){
+       const id = this.template.querySelector('lightning-datatable');
+       this.recordData = id.getSelectedRows();
+       console.log('this.recorddata=------>', this.recordData);
+       this.handleModalDetails();
+    }
+    
+    handleModalDetails(){
+        this.name=this.recordData.map(item=>item.Name);
+        this.email = this.recordData.map(item=>item.Email__c);
+        this.phone = this.recordData.map(item=>item.Contact_Number__c);
+        this.title = this.recordData.map(item=>item.Title__c);
+        this.id = this.recordData.map(item=>item.Id);
+        this.showModal=!this.modal;
+    }
 }

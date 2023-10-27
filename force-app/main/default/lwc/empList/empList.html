@@ -1,12 +1,26 @@
 <template>
 
   <div class="main">
+   
     <!-- <h1>Department ---  {department}</h1> -->
     <div class="search">
       <lightning-input type="search" placeholder="Search by name..." onchange={handleSearch}></lightning-input>
     </div>
     <div>
-      <lightning-datatable key-field="id" data={employeeList} columns={columns}></lightning-datatable>
+      <lightning-datatable key-field="id" data={employeeList}  onrowselection={handleRecordDetails} columns={columns}></lightning-datatable>
+    </div>
+    <div class="popup-container">
+      <template lwc:if={showModal}>
+        <lightning-modal-header label="Employee Details"></lightning-modal-header>
+        <lightning-modal-body>
+          <h1><b>Name-</b> {name}</h1>
+          <h1><b>Phone-</b> {phone}</h1>
+          <h1><b>Email-</b> {email}</h1>
+          <h1><b>Title-</b> {title}</h1>
+          <h1><b>Id-</b>{id}</h1>
+        </lightning-modal-body>
+        <lightning-modal-footer></lightning-modal-footer>
+      </template>
     </div>
   </div>
 </template>
