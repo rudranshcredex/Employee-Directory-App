@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningMessageChannel>
+    <masterLabel>FilterData</masterLabel>
+    <isExposed>true</isExposed>
+    <lightningMessageFields>
+        <description>Department picklist data</description>
+        <fieldName>department</fieldName>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <description>Location</description>
+        <fieldName>location</fieldName>
+    </lightningMessageFields>
+</LightningMessageChannel>
