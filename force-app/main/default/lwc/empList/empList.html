@@ -7,7 +7,7 @@
       <lightning-input type="search" placeholder="Search by name..." onchange={handleSearch}></lightning-input>
     </div>
     <div>
-      <lightning-datatable key-field="id" data={employeeList}  onrowselection={handleRecordDetails} columns={columns}></lightning-datatable>
+      <lightning-datatable key-field="id" data={employeeList}  onrowselection={handleRecordDetails} columns={columns} selected-rows={selectedRows}></lightning-datatable>
     </div>
     <div class="popup-container">
       <template lwc:if={showModal}>
@@ -19,7 +19,13 @@
           <h1><b>Title-</b> {title}</h1>
           <h1><b>Id-</b>{id}</h1>
         </lightning-modal-body>
-        <lightning-modal-footer></lightning-modal-footer>
+        <lightning-modal-footer>
+          <lightning-button 
+            variant="brand"
+            label="Close" 
+            onclick={handleClose} 
+          ></lightning-button>
+        </lightning-modal-footer>
       </template>
     </div>
   </div>

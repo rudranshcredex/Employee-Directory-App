@@ -6,42 +6,12 @@
 .main{
     background-color: white;
 }
-
-.popup-container {
-    display: none; /* Hide the modal by default */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background overlay */
-    z-index: 1;
-    justify-content: center;
-    align-items: center;
-  }
+.popup-container{
+  width: 307px;
+  height: 208px;
+  z-index: 10;
+  transform: translate(15%, -135%);
   
-  .popup-container.template-host {
-    display: flex; /* Show the modal when the template is active */
-  }
-  
-  .popup-container.template-host lightning-modal {
-    max-width: 500px; /* Adjust the modal width as needed */
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  .popup-container.template-host lightning-modal-header {
-    background-color: #f2f2f2;
-  }
-  
-  .popup-container.template-host lightning-modal-footer {
-    background-color: #f2f2f2;
-  }
-  
-  .popup-container.template-host lightning-modal-body {
-    padding: 20px;
-  }
-  
+}
 
   

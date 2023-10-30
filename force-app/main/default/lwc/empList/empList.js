@@ -8,16 +8,12 @@ export default class EmpList extends LightningElement {
     @track employeeList;
     @track department;
     @track location;
-  
+    @track selectedRows =[];
+
     originalEmployeeList;
     subscription;
-    recordData;
-    name;
-    title;
-    phone;
-    email;
-    id;
-    showModal=false;
+    recordData; name; title; phone; email; id;
+    showModal = false;
 
 
     columns = [{
@@ -33,7 +29,6 @@ export default class EmpList extends LightningElement {
         label: 'Location', fieldName: 'Location__c'
     }
     ]
-
 
     @wire(MessageContext)
     messageContext;
@@ -89,19 +84,27 @@ export default class EmpList extends LightningElement {
         }
     }
 
-    handleRecordDetails(){
-       const id = this.template.querySelector('lightning-datatable');
-       this.recordData = id.getSelectedRows();
-       console.log('this.recorddata=------>', this.recordData);
-       this.handleModalDetails();
+    handleRecordDetails(event) {
+        const id = this.template.querySelector('lightning-datatable');
+        this.recordData = id.getSelectedRows();
+        console.log('this.recorddata=------>', this.recordData);
+        this.handleModalDetails();
+        const selectedRows = event.detail.selectedRows;
+        this.selectedRows = selectedRows;
+
     }
-    
-    handleModalDetails(){
-        this.name=this.recordData.map(item=>item.Name);
-        this.email = this.recordData.map(item=>item.Email__c);
-        this.phone = this.recordData.map(item=>item.Contact_Number__c);
-        this.title = this.recordData.map(item=>item.Title__c);
-        this.id = this.recordData.map(item=>item.Id);
-        this.showModal=!this.modal;
+
+    handleModalDetails() {
+        this.name = this.recordData.map(item => item.Name);
+        this.email = this.recordData.map(item => item.Email__c);
+        this.phone = this.recordData.map(item => item.Contact_Number__c);
+        this.title = this.recordData.map(item => item.Title__c);
+        this.id = this.recordData.map(item => item.Id);
+        this.showModal = !this.showmodal;
+    }
+    handleClose() {
+        this.showModal = false;
+        this.selectedRows = [];
+
     }
 }
